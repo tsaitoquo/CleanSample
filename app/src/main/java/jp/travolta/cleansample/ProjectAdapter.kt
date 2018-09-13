@@ -17,7 +17,7 @@ class ProjectAdapter(private val projectClickCallback: ProjectClickCallback?) : 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
         val binding : ProjectListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.project_list_item, parent, false)
 
-//        binding.setCallback(projectClickCallback)
+        binding.setCallback(projectClickCallback)
 
         return ProjectViewHolder(binding)
     }
