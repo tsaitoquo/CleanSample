@@ -8,7 +8,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.databinding.ObservableField
 import javax.inject.Inject
 
-class HubsViewModel @Inject
+class ListViewModel @Inject
 constructor(projectRepository: ProjectRepository, application: Application) : AndroidViewModel(application) {
     /**
      * Expose the LiveData Projects query so the UI can observe it.
@@ -21,4 +21,3 @@ constructor(projectRepository: ProjectRepository, application: Application) : An
         projectListObservable = projectRepository.getProjectList("Google")
     }
 }
-

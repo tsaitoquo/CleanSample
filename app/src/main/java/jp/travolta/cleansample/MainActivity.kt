@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun findOrCreateViewFragment() =
             supportFragmentManager.findFragmentById(R.id.fragment_container) ?:
-            ItemListFragment.newInstance().also {
+            ListFragment.newInstance().also {
                 replaceFragmentInActivity(it, R.id.fragment_container)
             }
 
