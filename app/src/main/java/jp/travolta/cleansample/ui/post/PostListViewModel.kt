@@ -8,6 +8,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import jp.travolta.cleansample.R
 import jp.travolta.cleansample.base.BaseViewModel
+import jp.travolta.cleansample.model.Post
 import jp.travolta.cleansample.network.PostApi
 import javax.inject.Inject
 
@@ -26,6 +27,8 @@ class PostListViewModel: BaseViewModel() {
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadPosts() }
 
+    val postListAdapter: PostListAdapter = PostListAdapter()
+
     init{
         loadPosts()
     }
@@ -42,7 +45,7 @@ class PostListViewModel: BaseViewModel() {
                 .doOnSubscribe { onRetrievePostListStart() }
                 .doOnTerminate { onRetrievePostListFinish() }
                 .subscribe(
-                        { onRetrievePostListSuccess() },
+                        { result -> onRetrievePostListSuccess(result) },
                         { onRetrievePostListError() }
                 )
     }
@@ -57,9 +60,9 @@ class PostListViewModel: BaseViewModel() {
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrievePostListSuccess(){
+    private fun onRetrievePostListSuccess(postList:List<Post>){
         Log.d(TAG, "onRetrievePostListSuccess")
-
+        postListAdapter.updatePostList(postList)
     }
 
     private fun onRetrievePostListError(){
